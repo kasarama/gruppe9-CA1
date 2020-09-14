@@ -24,7 +24,7 @@ public class FacadeJokeTest {
     @BeforeAll
     public static void setUpClass() {
        emf = EMF_Creator.createEntityManagerFactoryForTest();
-       facade = FacadeJoke.getFacadeExample(emf);
+       facade = FacadeJoke.getFacadeJoke(emf);
     }
 
     @AfterAll
