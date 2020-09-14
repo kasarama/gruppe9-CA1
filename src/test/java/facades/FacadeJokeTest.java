@@ -1,7 +1,7 @@
 package facades;
 
 import utils.EMF_Creator;
-import entities.RenameMe;
+import entities.Joke;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import org.junit.jupiter.api.AfterAll;
@@ -13,18 +13,18 @@ import org.junit.jupiter.api.Test;
 
 //Uncomment the line below, to temporarily disable this test
 //@Disabled
-public class FacadeExampleTest {
+public class FacadeJokeTest {
 
     private static EntityManagerFactory emf;
-    private static FacadeExample facade;
+    private static FacadeJoke facade;
 
-    public FacadeExampleTest() {
+    public FacadeJokeTest() {
     }
 
     @BeforeAll
     public static void setUpClass() {
        emf = EMF_Creator.createEntityManagerFactoryForTest();
-       facade = FacadeExample.getFacadeExample(emf);
+       facade = FacadeJoke.getFacadeExample(emf);
     }
 
     @AfterAll
@@ -39,9 +39,9 @@ public class FacadeExampleTest {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
-            em.createNamedQuery("RenameMe.deleteAllRows").executeUpdate();
-            em.persist(new RenameMe("Some txt", "More text"));
-            em.persist(new RenameMe("aaa", "bbb"));
+            em.createNamedQuery("Joke.deleteAllRows").executeUpdate();
+            em.persist(new Joke(1L,"Some txt", "More text"));
+            em.persist(new Joke(2L,"aaa", "bbb"));
 
             em.getTransaction().commit();
         } finally {
@@ -57,7 +57,7 @@ public class FacadeExampleTest {
     // TODO: Delete or change this method 
     @Test
     public void testAFacadeMethod() {
-        assertEquals(2, facade.getRenameMeCount(), "Expects two rows in the database");
+        assertEquals(2, facade.getJokeCount(), "Expects two rows in the database");
     }
 
 }
