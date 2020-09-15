@@ -7,6 +7,7 @@ import facades.FacadeJoke;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -35,12 +36,28 @@ public class JokeResource {
         //System.out.println("--------------->"+count);
         return "{\"count\":"+count+"}";  //Done manually so no need for a DTO
     }
+   
     
-     @GET
-    @Path("/populate")
+    
+    @Path("populate")
+    @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String populate() {
         FACADE.populateDB();
         return "{\"msg\":\"3 jokes added\"}";
+    }
+    
+    @Path("all")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getAllJokes() {
+        return GSON.toJson(FACADE.getAllJokes());
+    }
+    
+    @Path("/{id}")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getJokeById(@PathParam("id")int id) {
+        return GSON.toJson(FACADE.getJokeByID(id));
     }
 }
