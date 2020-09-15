@@ -108,7 +108,7 @@ public class GroupmembersResourceTest {
         .statusCode(HttpStatus.OK_200.getStatusCode())
         .body("size()", is(2))
         .and()
-        .body("firstName",hasItems("frist1","firstname"));
+        .body("name",hasItems("frist1","firstname"));
         
     }
 

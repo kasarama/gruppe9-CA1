@@ -7,6 +7,7 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import dto.StudentDTO;
 import entities.Student;
 import facades.StudentFacade;
 import java.util.ArrayList;
@@ -55,9 +56,13 @@ private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerF
     public String getAllMembers() {
         List<Student> all = FACADE.getAllStudents();
         //List<StudentDTO> dtos = converter.listMemberEntityToDTO(all);
+        List<StudentDTO> dtos = new ArrayList();
+        for (Student student : all) {
+            StudentDTO sDTO = new StudentDTO(student);
+            dtos.add(sDTO);
+        }
         
-        
-        return new Gson().toJson(all);
+        return new Gson().toJson(dtos);
     }
     
     @Path("insertdata")
