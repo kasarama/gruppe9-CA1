@@ -25,7 +25,7 @@ public class JokeResourceTest {
 
     private static final int SERVER_PORT = 7777;
     private static final String SERVER_URL = "http://localhost/api";
-    private static Joke r1,r2;
+    private static Joke j1,j2;
     
     static final URI BASE_URI = UriBuilder.fromUri(SERVER_URL).port(SERVER_PORT).build();
     private static HttpServer httpServer;
@@ -62,13 +62,13 @@ public class JokeResourceTest {
     @BeforeEach
     public void setUp() {
         EntityManager em = emf.createEntityManager();
-        r1 = new Joke(1L,"Some txt","More text");
-        r2 = new Joke(2L,"aaa","bbb");
+        j1 = new Joke(1L,"Some txt","More text","source");
+        j2 = new Joke(2L,"aaa","bbb","source");
         try {
             em.getTransaction().begin();
             em.createNamedQuery("Joke.deleteAllRows").executeUpdate();
-            em.persist(r1);
-            em.persist(r2); 
+            em.persist(j1);
+            em.persist(j2); 
             em.getTransaction().commit();
         } finally { 
             em.close();

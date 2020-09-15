@@ -40,8 +40,8 @@ public class FacadeJokeTest {
         try {
             em.getTransaction().begin();
             em.createNamedQuery("Joke.deleteAllRows").executeUpdate();
-            em.persist(new Joke(1L,"Some txt", "More text"));
-            em.persist(new Joke(2L,"aaa", "bbb"));
+            em.persist(new Joke(1L,"Some txt", "More text", "source"));
+            em.persist(new Joke(2L,"aaa", "bbb", "source"));
 
             em.getTransaction().commit();
         } finally {

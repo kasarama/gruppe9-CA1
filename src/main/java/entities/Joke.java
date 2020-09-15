@@ -1,11 +1,14 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 @Entity
@@ -18,11 +21,28 @@ public class Joke implements Serializable {
     private Long id;
     private String joke;
     private String topic;
+    @Temporal(TemporalType.DATE)
+    private java.util.Date created;
+    private String source;
 
-    public Joke(Long id, String joke, String topic) {
+    public Joke(Long id, String joke, String topic, String source) {
         this.id = id;
         this.joke = joke;
         this.topic = topic;
+        this.created = new Date();
+        this.source = source;
+    }
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
     }
 
     public String getJoke() {
