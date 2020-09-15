@@ -1,15 +1,14 @@
 package facades;
 
+import dto.JokeDTO;
 import entities.Joke;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 
-/**
- *
- * Rename Class to a relevant name Add add relevant facade methods
- */
+
 public class FacadeJoke {
 
     private static FacadeJoke instance;
@@ -36,7 +35,7 @@ public class FacadeJoke {
         return emf.createEntityManager();
     }
     
-    //TODO Remove/Change this before use
+    
     public long getJokeCount(){
         EntityManager em = emf.createEntityManager();
         try{
@@ -62,5 +61,35 @@ public class FacadeJoke {
             em.close();
         }
     }
-
+     
+     public List<JokeDTO> getAllJokes() {
+                
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            TypedQuery query = em.createQuery("SELECT j FROM Joke j", Joke.class);
+              List<Joke> jokes = query.getResultList();
+            List<JokeDTO> jokeDTOs = new ArrayList<>();
+            for (Joke joke : jokes) {
+                jokeDTOs.add(new JokeDTO(joke));
+            }
+            return jokeDTOs;
+        } 
+        finally {
+            em.close();
+        }
+    }
+     
+     public JokeDTO getJokeByID(long id) {
+        EntityManager em = getEntityManager();
+        try {
+            em.getTransaction().begin();
+            Joke joke = em.find(Joke.class, id);
+            return new JokeDTO(joke);
+        } finally {
+            em.close();
+        }
+    }
 }
+
+
