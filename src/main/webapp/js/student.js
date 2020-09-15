@@ -16,7 +16,7 @@ count = 0;
             function fatchAllStudents() {
                 //let url = "https://dosmarter.tech/Gruppe9-CA1/api/groupmembers/all"
               //  let url = "http://localhost:8080/api/groupmembers/all";
-               let url = "https://dosmarter.tech/Gruppe9-CA1/api/groupmembers/all";
+               let url = "https://dosmarter.tech/api/groupmembers/all";
                 fetch(url)
                         .then(res => res.json())
                         .then(data => {
