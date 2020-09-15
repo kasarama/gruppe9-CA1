@@ -7,6 +7,8 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import dto.Converter;
+import dto.MemberDTO;
 import facades.MemberFacade;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
@@ -37,6 +39,7 @@ public class GroupmembersResource {
 
     private static final MemberFacade FACADE = MemberFacade.getMemberFacade(EMF);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+    private static Converter converter= new Converter();
 
     
     /**
@@ -62,6 +65,8 @@ public class GroupmembersResource {
     @Produces(MediaType.APPLICATION_JSON)
     public String getAllMembers() {
         List<GroupMember> all = FACADE.getAllMembers();
+        List<MemberDTO> dtos = converter.listMemberEntityToDTO(all);
+        
         
         return new Gson().toJson(all);
     }
