@@ -30,9 +30,17 @@ public class JokeResource {
     @Path("count")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    public String getRenameMeCount() {
+    public String getJokeCount() {
         long count = FACADE.getJokeCount();
         //System.out.println("--------------->"+count);
         return "{\"count\":"+count+"}";  //Done manually so no need for a DTO
+    }
+    
+     @GET
+    @Path("/populate")
+    @Produces({MediaType.APPLICATION_JSON})
+    public String populate() {
+        FACADE.populateDB();
+        return "{\"msg\":\"3 jokes added\"}";
     }
 }

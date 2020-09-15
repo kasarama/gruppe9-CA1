@@ -40,8 +40,8 @@ public class FacadeJokeTest {
         try {
             em.getTransaction().begin();
             em.createNamedQuery("Joke.deleteAllRows").executeUpdate();
-            em.persist(new Joke(1L,"Some txt", "More text", "source"));
-            em.persist(new Joke(2L,"aaa", "bbb", "source"));
+            em.persist(new Joke("Don't be mad at lazy people.\n" + "They didn't do anything.", "Productivity", "/u To_me_my_board"));
+            em.persist(new Joke("What’s the difference between a police officer and a bullet?\n" +"When a bullet kills someone else, you know it’s been fired", "Police", "/u easywaycentre"));
 
             em.getTransaction().commit();
         } finally {

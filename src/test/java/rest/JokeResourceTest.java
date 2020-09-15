@@ -62,8 +62,8 @@ public class JokeResourceTest {
     @BeforeEach
     public void setUp() {
         EntityManager em = emf.createEntityManager();
-        j1 = new Joke(1L,"Some txt","More text","source");
-        j2 = new Joke(2L,"aaa","bbb","source");
+        j1 = new Joke("Don't be mad at lazy people.\n" + "They didn't do anything.", "Productivity", "/u To_me_my_board");
+        j2 = new Joke("What’s the difference between a police officer and a bullet?\n" + "When a bullet kills someone else, you know it’s been fired", "Police", "/u easywaycentre");
         try {
             em.getTransaction().begin();
             em.createNamedQuery("Joke.deleteAllRows").executeUpdate();

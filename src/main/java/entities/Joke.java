@@ -25,8 +25,7 @@ public class Joke implements Serializable {
     private java.util.Date created;
     private String source;
 
-    public Joke(Long id, String joke, String topic, String source) {
-        this.id = id;
+    public Joke(String joke, String topic, String source) {
         this.joke = joke;
         this.topic = topic;
         this.created = new Date();
