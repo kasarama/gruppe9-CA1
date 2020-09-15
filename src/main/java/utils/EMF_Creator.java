@@ -43,7 +43,7 @@ public class EMF_Creator {
             System.out.println("CONNECTION_STR -->" + System.getenv("CONNECTION_STR_2"));
             String user = System.getenv("USER");
             String pw = System.getenv("PW");
-            String connection_str = System.getenv("CONNECTION_STR");
+            String connection_str = System.getenv("CONNECTION_STR_2");
             Properties props = new Properties();
             props.setProperty("javax.persistence.jdbc.user", user);
             props.setProperty("javax.persistence.jdbc.password", pw);
@@ -68,7 +68,7 @@ public class EMF_Creator {
         } catch (javax.persistence.PersistenceException ex){
             System.out.println("##########################################################");
             System.out.println("######      ERROR Creating a persistence Unit       ######");
-            System.out.println("###### Have you started the dev and test databases? ######");
+            System.out.println("###### Have you started the joke and test databases? ######");
             System.out.println("######          (docker-compose up -d )             ######");
             System.out.println("##########################################################");
             throw ex; 
