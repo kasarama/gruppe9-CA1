@@ -60,4 +60,11 @@ public class JokeResource {
     public String getJokeById(@PathParam("id")int id) {
         return GSON.toJson(FACADE.getJokeByID(id));
     }
+    
+    @Path("random")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getRandomJoke() {
+        return GSON.toJson(FACADE.getRandomJoke());
+    }
 }
