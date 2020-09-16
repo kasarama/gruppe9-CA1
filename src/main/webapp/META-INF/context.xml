@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--<Context path="/jpareststarter"/>-->
-<Context path="Gruppe9-CA1">
+<Context path="Gruppe9-CA1" antiResourceLocking="true">
     
     
 <!--    <Resource name="jdbc/DATABASE1"
