@@ -5,8 +5,7 @@ const getAllJokesBtn = document.getElementById("getAllJokes");
 const inputIDTextField = document.getElementById("inputID");
 
 //let url = 'https://dosmarter.tech/api/joke/all';
-//let url = '/api/joke/';
-let url = 'https://www.noellzane.dk/ROOT-1.0.1/api/joke/'
+let url = '/api/joke/';
 
 
 document.getElementById("getAllJokes").addEventListener("click", function (event) {
