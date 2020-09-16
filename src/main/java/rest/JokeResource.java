@@ -44,7 +44,7 @@ public class JokeResource {
     @Produces({MediaType.APPLICATION_JSON})
     public String populate() {
         FACADE.populateDB();
-        return "{\"msg\":\"3 jokes added\"}";
+        return "{\"msg\":\"5 jokes added\"}";
     }
     
     @Path("all")
