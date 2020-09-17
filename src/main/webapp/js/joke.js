@@ -1,57 +1,48 @@
-const jokeDiv = document.getElementById("forJokes");
-const jokeByIDBtn = document.getElementById("jokeByID");
-const randomJokeBtn = document.getElementById("randomJoke");
-const getAllJokesBtn = document.getElementById("getAllJokes");
-const inputIDTextField = document.getElementById("inputID");
+let url = 'api/joke/';
 
-//let url = 'https://dosmarter.tech/api/joke/all';
-let url = '/api/joke/';
-
-
+//Get All Jokes Fetch
 document.getElementById("getAllJokes").addEventListener("click", function (event) {
     event.preventDefault();
         fetch(url + 'all')
             .then(res => res.json()) 
             .then(data => {
-                //console.log("data", data);
-                 document.getElementById("jokeTable").innerHTML = html+makeTable(data);
+                 //console.log("data", data);
+                 document.getElementById("jokeTable").innerHTML = html+makeTableAllJokes()(data); //Renders joke table
                  //console.log(makeTable(data));
-            })
+            });
     });
 document.getElementById("jokeByID").addEventListener("click", function (event) {
     event.preventDefault();
         fetch(url + document.getElementById("inputID").value)
             .then(res => res.json()) 
             .then(data => {
-                // console.log("data", data);
-                 document.getElementById("jokeTable").innerHTML = html+ `<tr><td>
-                 ${data.id} 
-                 </td><td> 
-                 ${data.joke}
-                 </td><td>
-                 ${data.topic} 
-                 </td>`
-                //  console.log(makeTable(data));
-            })
+                 // console.log("data", data);
+                 document.getElementById("jokeTable").innerHTML = html+makeTableForSpecificJoke(data); //Renders joke table
+                 //console.log(makeTableForSpecificJoke(data));
+            });
     });
 document.getElementById("randomJoke").addEventListener("click", function (event) {
     event.preventDefault();
         fetch(url + 'random')
             .then(res => res.json()) 
             .then(data => {
-                //console.log("data", data);
-                 document.getElementById("jokeTable").innerHTML = html+`<tr><td>
+                 //console.log("data", data);
+                 document.getElementById("jokeTable").innerHTML = html+makeTableForSpecificJoke(data); //Renders joke table
+                 //console.log(makeTableForSpecificJoke(data));
+            });
+    });
+    
+function makeTableForSpecificJoke(data){
+        return(`<tr><td>
                  ${data.id} 
                  </td><td> 
                  ${data.joke}
                  </td><td>
                  ${data.topic} 
-                 </td>`
-                 //console.log(makeTable(data));;
-            })
-    });
+                 </td>`);
+};
 
-    function makeTable(data) {
+    function makeTableAllJokes(data) {
         createTable = data.map(function (e) {
                 return (
                     `<tr><td>
@@ -62,8 +53,8 @@ document.getElementById("randomJoke").addEventListener("click", function (event)
                     ${e.topic} 
                     </td>`
                 );
-            })
-            .join(" ");
+            }).join(" ");
+            
         return createTable;
     }
 const html = '<thead><th>ID</th><th>Joke</th><th>Topic</th></thead>';

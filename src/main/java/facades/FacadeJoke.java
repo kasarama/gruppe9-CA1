@@ -42,9 +42,8 @@ public class FacadeJoke {
         } finally {
             em.close();
         }
-
     }
-
+//Puts data in DB.
     public void populateDB() {
         EntityManager em = emf.createEntityManager();
         try {
@@ -65,13 +64,12 @@ public class FacadeJoke {
     }
 
     public List<JokeDTO> getAllJokes() {
-
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
-            TypedQuery query = em.createNamedQuery("Joke.getAll",Joke.class);
-            List<Joke> jokes = query.getResultList();
-            List<JokeDTO> jokeDTOs = new ArrayList<>();
+            TypedQuery query = em.createNamedQuery("Joke.getAll",Joke.class); //Uses our NamedQuery 
+            List<Joke> jokes = query.getResultList(); //Puts our results in a list of jokes.
+            List<JokeDTO> jokeDTOs = new ArrayList<>(); //Puts our List of jokes into a list of JokeDTOs
             for (Joke joke : jokes) {
                 jokeDTOs.add(new JokeDTO(joke));
             }
@@ -85,15 +83,15 @@ public class FacadeJoke {
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
-            Joke joke = em.find(Joke.class, id);
-            return new JokeDTO(joke);
+            Joke joke = em.find(Joke.class, id); //Finds joke with given ID
+            return new JokeDTO(joke); //Returns joke as jokeDTO.
         } finally {
             em.close();
         }
     }
 
      public JokeDTO getRandomJoke() {
-        long jokeCount =  getJokeCount(); //Get the accurate number of jokes from DB
+        long jokeCount =  getJokeCount(); //Get the accurate number of jokes currently in DB
         long randomNumber = ((long) (Math.random()*jokeCount)+1); //Make random number
         JokeDTO joke = getJokeByID(randomNumber); //Call getJokeByID with random number
         return joke;

@@ -57,7 +57,7 @@ public class FacadeJokeTest {
     public void testFacadeGetAllJokes(){
         List<JokeDTO> jokes = facade.getAllJokes();
         assertEquals(2,facade.getJokeCount(),"Expects two jokes in the database");
-        assertThat(jokes, everyItem(hasProperty("joke")));
+        assertThat(jokes, everyItem(hasProperty("joke"))); //Checks if every joke has the property joke
     }
       @Test
     public void testFacadeGetJokeByID() {

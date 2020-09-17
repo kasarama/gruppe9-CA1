@@ -11,7 +11,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-//Todo Remove or change relevant parts before ACTUAL use
 @Path("joke")
 public class JokeResource {
 
@@ -36,8 +35,6 @@ public class JokeResource {
         //System.out.println("--------------->"+count);
         return "{\"count\":"+count+"}";  //Done manually so no need for a DTO
     }
-   
-    
     
     @Path("populate")
     @GET
