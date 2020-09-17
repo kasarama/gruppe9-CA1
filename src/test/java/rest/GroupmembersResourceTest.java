@@ -132,7 +132,7 @@ public class GroupmembersResourceTest {
         .statusCode(HttpStatus.OK_200.getStatusCode())
         .body("size()", is(4))
         .and()
-        .body("firstName",hasItems("Magdalena","Selina"));       
+        .body("name",hasItems("Magdalena","Selina"));       
         
         
     }

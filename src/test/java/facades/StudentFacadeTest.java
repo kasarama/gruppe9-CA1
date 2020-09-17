@@ -1,12 +1,10 @@
 
 package facades;
 
+import dto.StudentDTO;
 import utils.EMF_Creator;
-import entities.Joke;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -59,14 +57,14 @@ public class StudentFacadeTest {
   
     @Test
     public void testAddNewStudent() {
-        Student result = facade.addNewStudent(new Student("test1","test1","test1","test1"));
+        StudentDTO result = facade.addNewStudent(new Student("test1","test1","test1","test1"));
         assertTrue(result.getColor().equals("test1"));
     }
 
     @Test
     public void testGetAllStudents() {
         
-       List<Student> all = facade.getAllStudents();
+       List<StudentDTO> all = facade.getAllStudents();
         assertEquals(all.size(),2);
     }
     

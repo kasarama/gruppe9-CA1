@@ -5,6 +5,8 @@
  */
 package facades;
 
+import dto.DTOConverter;
+import dto.StudentDTO;
 import entities.Student;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -38,13 +40,13 @@ public class StudentFacade {
     }
 
     
-    public Student addNewStudent(Student student) {
+    public StudentDTO addNewStudent(Student student) {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
             em.persist(student);
             em.getTransaction().commit();
-            return student;
+            return new StudentDTO(student);
         } finally {
             em.close();
         }
@@ -52,11 +54,12 @@ public class StudentFacade {
     
     
 
-    public List<Student> getAllStudents() {
+    public List<StudentDTO> getAllStudents() {
         EntityManager em = emf.createEntityManager();
         try {
             TypedQuery<Student> query = em.createQuery("SELECT m FROM Student m", Student.class);
-            return query.getResultList();
+            return        DTOConverter.studentListToDTO( query.getResultList());
+
         } finally {
             em.close();
         }
