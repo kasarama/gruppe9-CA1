@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package entities;
 
 import java.io.Serializable;
@@ -18,34 +14,34 @@ public class Cars implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Int id;
-    private Int year;
+    private int id;
+    private int byear;
     private String make;
     private String model;
-    private Int Price;
+    private int price;
     
-    public Car(Int id, Int year, String make, String model, Int price){
+    public Cars(int id, int byear, String make, String model, int price){
         this.id = id;
-        this.year = year;
+        this.byear = byear;
         this.make = make;
         this.model = model;
         this.price = price;
     }
 
-    public Int getId() {
+    public int getCarId() {
         return id;
     }
 
-    public void setId(Int id) {
+    public void setCarId(int id) {
         this.id = id;
     }
     
-    public Int getYear() {
-        return year;
+    public int getbYear() {
+        return byear;
     }
 
-    public void setYear(Int year) {
-        this.year = year;
+    public void setbYear(int byear) {
+        this.byear = byear;
     }
     
      public String getMake() {
@@ -60,15 +56,15 @@ public class Cars implements Serializable {
         return model;
     }
 
-    public void setMake(String make) {
-        this.make = make;
+    public void setModel(String model) {
+        this.model = model;
     }
     
-     public Int getPrice() {
+     public int getPrice() {
         return price;
     }
 
-    public void setPrice(Int price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 }
