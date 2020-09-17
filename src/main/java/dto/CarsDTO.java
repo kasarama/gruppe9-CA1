@@ -13,6 +13,7 @@ public class CarsDTO {
     private String make;
     private String model;
     private int price;
+    private String img;
     
     public CarsDTO(){
     }
@@ -54,12 +55,21 @@ public class CarsDTO {
     public void setPrice(int price) {
         this.price = price;
     }
-        
+    
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+    
     public CarsDTO(Cars entity){
         this.id = entity.getCarId();
         this.byear = entity.getbYear();
         this.make = entity.getMake();
         this.model = entity.getModel();
         this.price = entity.getPrice(); 
+        this.img = entity.getImg();
     }    
 }
