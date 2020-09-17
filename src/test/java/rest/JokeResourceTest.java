@@ -14,10 +14,11 @@ import org.glassfish.grizzly.http.util.HttpStatus;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasItems;
+import static org.hamcrest.Matchers.is;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 //Uncomment the line below, to temporarily disable this test
 //@Disabled
@@ -25,7 +26,7 @@ public class JokeResourceTest {
 
     private static final int SERVER_PORT = 7777;
     private static final String SERVER_URL = "http://localhost/api";
-    private static Joke r1,r2;
+    private static Joke j1,j2;
     
     static final URI BASE_URI = UriBuilder.fromUri(SERVER_URL).port(SERVER_PORT).build();
     private static HttpServer httpServer;
@@ -62,13 +63,14 @@ public class JokeResourceTest {
     @BeforeEach
     public void setUp() {
         EntityManager em = emf.createEntityManager();
-        r1 = new Joke(1L,"Some txt","More text");
-        r2 = new Joke(2L,"aaa","bbb");
+        j1 = new Joke("Don't be mad at lazy people.\n" + "They didn't do anything.", "Productivity", "/u To_me_my_board");
+        j2 = new Joke("What’s the difference between a police officer and a bullet?\n" + "When a bullet kills someone else, you know it’s been fired", "Police", "/u easywaycentre");
+        
         try {
             em.getTransaction().begin();
             em.createNamedQuery("Joke.deleteAllRows").executeUpdate();
-            em.persist(r1);
-            em.persist(r2); 
+            em.persist(j1);
+            em.persist(j2); 
             em.getTransaction().commit();
         } finally { 
             em.close();
@@ -93,7 +95,7 @@ public class JokeResourceTest {
     }
     
     @Test
-    public void testCount() throws Exception {
+    public void testJokeCount() throws Exception {
         given()
         .contentType("application/json")
         .get("/joke/count").then()
@@ -101,4 +103,32 @@ public class JokeResourceTest {
         .statusCode(HttpStatus.OK_200.getStatusCode())
         .body("count", equalTo(2));   
     }
+    
+  
+    @Test
+    public void testGetAllJokes() throws Exception {
+        given()
+                .contentType("application/json")
+                .get("/joke/all").then()
+                .assertThat()
+                .statusCode(HttpStatus.OK_200.getStatusCode())
+                .body("size()", is(2))
+                .and()
+                .body("topic", hasItems("Productivity", "Police"));
+                    
+    }  
+    
+    @Test
+    public void testGetJokeById() throws Exception {
+        given()
+                .contentType("application/json")
+                .get("/joke/" + j1.getId())
+                .then().assertThat()
+                .statusCode(HttpStatus.OK_200.getStatusCode())
+                .body("id", equalTo(j1.getId().intValue()))
+                .log()
+                .body();
+                
+    }
+    
 }

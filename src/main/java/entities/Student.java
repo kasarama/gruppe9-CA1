@@ -36,6 +36,8 @@ public class Student implements Serializable {
     }
     
       public Student() {
+          Integer[] i ={1,2,3,4};
+          
     }
 
     public Student(String firstName, String lastName, String color, String cphId) {

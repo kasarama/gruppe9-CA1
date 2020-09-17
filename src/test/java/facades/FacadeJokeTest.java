@@ -1,11 +1,14 @@
 package facades;
 
+import dto.JokeDTO;
 import utils.EMF_Creator;
 import entities.Joke;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.everyItem;
+import static org.hamcrest.Matchers.hasProperty;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,7 +20,9 @@ public class FacadeJokeTest {
 
     private static EntityManagerFactory emf;
     private static FacadeJoke facade;
-
+    private Joke j1;
+    private Joke j2;
+    
     public FacadeJokeTest() {
     }
 
@@ -27,37 +32,36 @@ public class FacadeJokeTest {
        facade = FacadeJoke.getFacadeJoke(emf);
     }
 
-    @AfterAll
-    public static void tearDownClass() {
-//        Clean up database after test is done or use a persistence unit with drop-and-create to start up clean on every test
-    }
-
-    // Setup the DataBase in a known state BEFORE EACH TEST
-    //TODO -- Make sure to change the script below to use YOUR OWN entity class
     @BeforeEach
     public void setUp() {
         EntityManager em = emf.createEntityManager();
+        j1 = new Joke("Don't be mad at lazy people.\n" + "They didn't do anything.", "Productivity", "/u To_me_my_board");
+        j2 = new Joke("What’s the difference between a police officer and a bullet?\n" +"When a bullet kills someone else, you know it’s been fired", "Police", "/u easywaycentre");
         try {
             em.getTransaction().begin();
-            em.createNamedQuery("Joke.deleteAllRows").executeUpdate();
-            em.persist(new Joke(1L,"Some txt", "More text"));
-            em.persist(new Joke(2L,"aaa", "bbb"));
-
+            em.createNamedQuery("Joke.deleteAllRows").executeUpdate(); //Deletes all rows in DB
+            em.persist(j1); //Persists two jokes
+            em.persist(j2);
             em.getTransaction().commit();
         } finally {
             em.close();
         }
     }
 
-    @AfterEach
-    public void tearDown() {
-//        Remove any data after each test was run
-    }
-
-    // TODO: Delete or change this method 
     @Test
-    public void testAFacadeMethod() {
-        assertEquals(2, facade.getJokeCount(), "Expects two rows in the database");
+    public void testFacadeJokeGetCount() {
+        assertEquals(2, facade.getJokeCount(), "Expects two jokes in the database");
     }
-
+    
+    @Test
+    public void testFacadeGetAllJokes(){
+        List<JokeDTO> jokes = facade.getAllJokes();
+        assertEquals(2,facade.getJokeCount(),"Expects two jokes in the database");
+        assertThat(jokes, everyItem(hasProperty("joke")));
+    }
+      @Test
+    public void testFacadeGetJokeByID() {
+        JokeDTO joke = facade.getJokeByID(j2.getId()); //Gets the joke of j2's ID
+        assertEquals("Police",joke.getTopic()); //Checks if the topic matches
+    }
 }
