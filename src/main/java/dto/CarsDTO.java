@@ -53,12 +53,13 @@ public class CarsDTO {
 
     public void setPrice(int price) {
         this.price = price;
+    }
         
     public CarsDTO(Cars entity){
         this.id = entity.getCarId();
         this.byear = entity.getbYear();
         this.make = entity.getMake();
         this.model = entity.getModel();
-        this.price = entity.getPrice();        
+        this.price = entity.getPrice(); 
     }    
 }
