@@ -1,7 +1,11 @@
-package rest;
 /*
-import entities.Joke;
-import utils.EMF_Creator;
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package rest;
+
+import entities.Album;
 import io.restassured.RestAssured;
 import static io.restassured.RestAssured.given;
 import io.restassured.parsing.Parser;
@@ -13,21 +17,25 @@ import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.grizzly.http.util.HttpStatus;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
-import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.is;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-//Uncomment the line below, to temporarily disable this test
-//@Disabled
-public class JokeResourceTest {
+import org.junit.jupiter.api.BeforeEach;
+import utils.EMF_Creator;
+
+/**
+ *
+ * @author magda
+ */
+public class AlbumResourceTest {
 
     private static final int SERVER_PORT = 7777;
     private static final String SERVER_URL = "http://localhost/api";
-    private static Joke j1,j2;
-    
+    private static Album al = new Album(2020, 2500, "Your Mama", "Poland", 3, 4, 10, "home", "done");
+    private static Album bum = new Album(1900, 200, "Your Papa", "UK", 13, 4, 10, "none", "up");
+
     static final URI BASE_URI = UriBuilder.fromUri(SERVER_URL).port(SERVER_PORT).build();
     private static HttpServer httpServer;
     private static EntityManagerFactory emf;
@@ -42,92 +50,84 @@ public class JokeResourceTest {
         //This method must be called before you request the EntityManagerFactory
         EMF_Creator.startREST_TestWithDB();
         emf = EMF_Creator.createEntityManagerFactoryForTest();
-        
+
         httpServer = startServer();
         //Setup RestAssured
         RestAssured.baseURI = SERVER_URL;
         RestAssured.port = SERVER_PORT;
         RestAssured.defaultParser = Parser.JSON;
     }
-    
+
     @AfterAll
-    public static void closeTestServer(){
+    public static void closeTestServer() {
         //System.in.read();
-         //Don't forget this, if you called its counterpart in @BeforeAll
-         EMF_Creator.endREST_TestWithDB();
-         httpServer.shutdownNow();
+        //Don't forget this, if you called its counterpart in @BeforeAll
+        EMF_Creator.endREST_TestWithDB();
+        httpServer.shutdownNow();
     }
-    
-    // Setup the DataBase (used by the test-server and this test) in a known state BEFORE EACH TEST
+
     @BeforeEach
     public void setUp() {
         EntityManager em = emf.createEntityManager();
-        j1 = new Joke("Don't be mad at lazy people.\n" + "They didn't do anything.", "Productivity", "/u To_me_my_board");
-        j2 = new Joke("What’s the difference between a police officer and a bullet?\n" + "When a bullet kills someone else, you know it’s been fired", "Police", "/u easywaycentre");
-        
+
         try {
             em.getTransaction().begin();
-            em.createNamedQuery("Joke.deleteAllRows").executeUpdate();
-            em.persist(j1);
-            em.persist(j2); 
+            em.createQuery("DELETE FROM Album").executeUpdate();
+            em.persist(al);
+            em.persist(bum);
             em.getTransaction().commit();
-        } finally { 
+        } finally {
             em.close();
         }
     }
-    
+
     @Test
-    public void testServerIsUp() {
-        System.out.println("Testing is server UP");
-        given().when().get("/joke").then().statusCode(200);
-    }
-   
-    //This test assumes the database contains two rows
-    @Test
-    public void testDummyMsg() throws Exception {
+    public void testDemo() {
         given()
-        .contentType("application/json")
-        .get("/joke/").then()
-        .assertThat()
-        .statusCode(HttpStatus.OK_200.getStatusCode())
-        .body("msg", equalTo("Hello World"));   
+                .contentType("text/html")
+                .get("/album/").then()
+                .assertThat()
+                .statusCode(HttpStatus.OK_200.getStatusCode())
+                .equals("<h1>Album Demo<h1>");
     }
-    
+
     @Test
-    public void testJokeCount() throws Exception {
-        given()
-        .contentType("application/json")
-        .get("/joke/count").then()
-        .assertThat()
-        .statusCode(HttpStatus.OK_200.getStatusCode())
-        .body("count", equalTo(2));   
-    }
-    
-  
-    @Test
-    public void testGetAllJokes() throws Exception {
+    public void testGetAllAlbums() {
+
         given()
                 .contentType("application/json")
-                .get("/joke/all").then()
+                .get("/album/all")
+                .then()
                 .assertThat()
                 .statusCode(HttpStatus.OK_200.getStatusCode())
                 .body("size()", is(2))
                 .and()
-                .body("topic", hasItems("Productivity", "Police"));
-                    
-    }  
-    
+                .body("country", hasItems("Poland", "UK"));
+
+    }
+
     @Test
-    public void testGetJokeById() throws Exception {
+    public void testPopulate() {
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            em.getTransaction().begin();
+            em.createQuery("DELETE FROM Album").executeUpdate();
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+
         given()
                 .contentType("application/json")
-                .get("/joke/" + j1.getId())
-                .then().assertThat()
+                .get("/album/populate")
+                .then()
+                .assertThat()
                 .statusCode(HttpStatus.OK_200.getStatusCode())
-                .body("id", equalTo(j1.getId().intValue()))
-                .log()
-                .body();
-                
+                .body("size()", is(40))
+                .and()
+                .body("publisher", hasItems("The Shimmering Wilds", "The Royal Lion Garden"));
+
     }
-    
-}*/
+
+}

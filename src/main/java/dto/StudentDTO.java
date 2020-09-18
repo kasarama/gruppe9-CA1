@@ -34,6 +34,14 @@ public class StudentDTO {
         this.name = name;
     }
 
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
     public StudentDTO(Student entity) {
         this.id = entity.getCphId();
         this.name = entity.getFirstName();

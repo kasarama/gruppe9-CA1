@@ -54,28 +54,24 @@ private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerF
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String getAllMembers() {
-        List<Student> all = FACADE.getAllStudents();
+        List<StudentDTO> all = FACADE.getAllStudents();
         //List<StudentDTO> dtos = converter.listMemberEntityToDTO(all);
-        List<StudentDTO> dtos = new ArrayList();
-        for (Student student : all) {
-            StudentDTO sDTO = new StudentDTO(student);
-            dtos.add(sDTO);
-        }
+               
         
-        return new Gson().toJson(dtos);
+        return new Gson().toJson(all);
     }
     
     @Path("insertdata")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String insertData() {
-        List<Student> all = new ArrayList();
+        List<StudentDTO> all = new ArrayList();
           if(FACADE.getAllStudents().isEmpty()){
               
-              Student m1=FACADE.addNewStudent(new Student("Søren", "Andersen", "white", "cph-sa343"));
-              Student m2=FACADE.addNewStudent(new Student("Magdalena", "Wawrzak", "white", "cph-mw216"));
-              Student m3=FACADE.addNewStudent(new Student("Selina", "Søndengaard", "white", "cph-ss258"));
-              Student m4=FACADE.addNewStudent(new Student("Noell", "Gierringe ", "white", "cph-ng67"));
+              StudentDTO m1=FACADE.addNewStudent(new Student("Søren", "Andersen", "blue", "cph-sa343"));
+              StudentDTO m2=FACADE.addNewStudent(new Student("Magdalena", "Wawrzak", "blue", "cph-mw216"));
+              StudentDTO m3=FACADE.addNewStudent(new Student("Selina", "Søndengaard", "blue", "cph-ss258"));
+              StudentDTO m4=FACADE.addNewStudent(new Student("Noell", "Gierringe ", "blue", "cph-ng67"));
               all.add(m1);
               all.add(m2);
               all.add(m3);
