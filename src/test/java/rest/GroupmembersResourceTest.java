@@ -1,6 +1,27 @@
 
 package rest;
 
+import entities.Student;
+import io.restassured.RestAssured;
+import static io.restassured.RestAssured.given;
+import io.restassured.parsing.Parser;
+import java.net.URI;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.ws.rs.core.UriBuilder;
+import org.glassfish.grizzly.http.server.HttpServer;
+import org.glassfish.grizzly.http.util.HttpStatus;
+import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
+import org.glassfish.jersey.server.ResourceConfig;
+import static org.hamcrest.Matchers.hasItems;
+import static org.hamcrest.Matchers.is;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import utils.EMF_Creator;
+
+/*
 import utils.EMF_Creator;
 import io.restassured.RestAssured;
 import static io.restassured.RestAssured.given;
@@ -22,6 +43,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import entities.Student;
+*/
+
+
 
 /**
  *
@@ -132,7 +156,7 @@ public class GroupmembersResourceTest {
         .statusCode(HttpStatus.OK_200.getStatusCode())
         .body("size()", is(4))
         .and()
-        .body("firstName",hasItems("Magdalena","Selina"));       
+        .body("name",hasItems("Magdalena","Selina"));       
         
         
     }

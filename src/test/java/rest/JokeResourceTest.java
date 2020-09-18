@@ -1,5 +1,5 @@
 package rest;
-
+/*
 import entities.Joke;
 import utils.EMF_Creator;
 import io.restassured.RestAssured;
@@ -131,4 +131,4 @@ public class JokeResourceTest {
                 
     }
     
-}
+}*/

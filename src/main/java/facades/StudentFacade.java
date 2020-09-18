@@ -5,6 +5,8 @@
  */
 package facades;
 
+import dto.Converter;
+import dto.StudentDTO;
 import entities.Student;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -16,8 +18,7 @@ import javax.persistence.TypedQuery;
  * @author magda
  */
 public class StudentFacade {
-    
-    
+
     private static StudentFacade instance;
     private static EntityManagerFactory emf;
 
@@ -37,31 +38,29 @@ public class StudentFacade {
         return instance;
     }
 
-    
-    public Student addNewStudent(Student student) {
+    public StudentDTO addNewStudent(Student student) {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
             em.persist(student);
             em.getTransaction().commit();
-            return student;
+            return new StudentDTO(student);
         } finally {
             em.close();
         }
     }
-    
-    
 
-    public List<Student> getAllStudents() {
+    public List<StudentDTO> getAllStudents() {
         EntityManager em = emf.createEntityManager();
         try {
-            TypedQuery<Student> query = em.createQuery("SELECT m FROM Student m", Student.class);
-            return query.getResultList();
+            TypedQuery<Student> query = em.createQuery("SELECT s FROM Student s", Student.class);
+            List<Student> students = query.getResultList();
+            
+            return Converter.studdentListToDTO(students);
+
         } finally {
             em.close();
         }
     }
 
-    
-    
 }

@@ -23,7 +23,7 @@ public class Student implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String firstName;
-    private String lastName; 
+    private String lastName;
     private String color;
     private String cphId;
 
@@ -34,8 +34,8 @@ public class Student implements Serializable {
     public void setCphId(String cphId) {
         this.cphId = cphId;
     }
-    
-      public Student() {
+
+    public Student() {
     }
 
     public Student(String firstName, String lastName, String color, String cphId) {
@@ -45,7 +45,6 @@ public class Student implements Serializable {
         this.cphId = cphId;
     }
 
-   
     public String getColor() {
         return color;
     }
@@ -53,12 +52,6 @@ public class Student implements Serializable {
     public void setColor(String color) {
         this.color = color;
     }
-    
-    
-
-    
-
-    
 
     public String getFirstName() {
         return firstName;
