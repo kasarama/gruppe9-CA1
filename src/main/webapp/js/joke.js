@@ -7,7 +7,7 @@ document.getElementById("getAllJokes").addEventListener("click", function (event
             .then(res => res.json()) 
             .then(data => {
                  //console.log("data", data);
-                 document.getElementById("jokeTable").innerHTML = html+makeTableAllJokes()(data); //Renders joke table
+                 document.getElementById("jokeTable").innerHTML = html+makeTableAllJokes(data); //Renders joke table
                  //console.log(makeTable(data));
             });
     });
