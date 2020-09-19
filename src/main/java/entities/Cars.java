@@ -19,13 +19,15 @@ public class Cars implements Serializable {
     private String make;
     private String model;
     private int price;
+    private String img;
     
-    public Cars(int id, int byear, String make, String model, int price){
+    public Cars(int id, int byear, String make, String model, int price, String img){
         this.id = id;
         this.byear = byear;
         this.make = make;
         this.model = model;
         this.price = price;
+        this.img = img;
     }
 
     public int getCarId() {
@@ -66,5 +68,12 @@ public class Cars implements Serializable {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 }

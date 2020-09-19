@@ -5,6 +5,7 @@
  */
 package dto;
 
+import entities.Cars;
 import entities.Student;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,5 +27,12 @@ public class DTOConverter {
         }
         return dtos;
     }
-    
+    public static  List<CarsDTO> CarsListToDTO(List<Cars> entities){
+    List<CarsDTO> dtoc = new ArrayList();
+        for (Cars car : entities) {
+            CarsDTO cDTO = new CarsDTO(car);
+            dtoc.add(cDTO);
+        }
+        return dtoc;
+    }
 }
