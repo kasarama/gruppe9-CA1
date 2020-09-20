@@ -1,8 +1,9 @@
-var allAlbums;
+
+
             function fetchOnLoad() {
-                // let url="api/album/all";
+                
                 fetch("api/album/all")
-                        .then(res => res.json()) //in flow1, just do it
+                        .then(res => res.json())
                         .then(data => {
                             console.log("data", data);
                             all = data.map(n => listAlbumDivs(n));
@@ -11,27 +12,6 @@ var allAlbums;
                         });
             }
 
-            var allAlbums;
-            function fetchOnLoad() {
-                // let url="api/album/all";
-                fetch("api/album/all")
-                        .then(res => res.json()) //in flow1, just do it
-                        .then(data => {
-                            console.log("data", data);
-                            all = data.map(n => listAlbumDivs(n));
-                            document.getElementById("galleri").innerHTML = all;
-                            document.getElementById("albumQ").innerHTML = "We've got " + all.length + " albums"
-                        });
-            }
-
-//---------------------------------------------------------------------------------------------------------------------
-//---------------------------------------------------------------------------------------------------------------------
-//---------------------------------------------------------------------------------------------------------------------
-//---------------------------------------------------------------------------------------------------------------------
-//---------------------------------------------------------------------------------------------------------------------
-//---------------------------------------------------------------------------------------------------------------------
-//---------------------------------------------------------------------------------------------------------------------
-//---------------------------------------------------------------------------------------------------------------------
 
 
              maxYear = document.getElementById("maxYear").value;
@@ -39,31 +19,15 @@ var allAlbums;
 
 
 
-/*
-                <form>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Find from before year</label>
-                        <input type="number" min=1900 max =2020 class="form-control" id="maxYear" placeholder="1990">
-                        <button type="submit" class="btn btn-active" id="beforeYear">Search</button>
-                    </div>
-                </form>
-                <form>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Find from after year</label>
-                        <input type="number" min=1900 max =2020 class="form-control" id="minYear" placeholder="1990">
-                        <button type="submit" class="btn btn-active"  id="afterYear" >Search</button>
-                    </div>
-                </form>
- */
             function fromBeforeYear(n) {
                 console.log("From before: " + maxYear);
-                if (n.year < maxYear)
+                if (n.year < document.getElementById("maxYear").value)
                     return n;
             }
             function fromAfterYear(n) {
                 console.log("From after " + minYear);
 
-                if (n.year > minYear)
+                if (n.year > document.getElementById("minYear").value)
                     return n;
             }
 
@@ -71,7 +35,7 @@ var allAlbums;
             buttMax = document.getElementById("beforeYear");
             buttMax.addEventListener("click", function (event) {
                 event.preventDefault();
-                fetch("http://localhost:8080/Gruppe9-CA1/api/album/all")
+                fetch("api/album/all")
                         .then(res => res.json()) //in flow1, just do it
                         .then(data => {
                             filtered=data.filter(fromBeforeYear);
@@ -84,32 +48,21 @@ var allAlbums;
             });
 
 
-
-
-
-
-
             buttMin = document.getElementById("afterYear");
             buttMin.addEventListener("click", function (event) {
                 event.preventDefault();
-                fetch("http://localhost:8080/Gruppe9-CA1/api/album/all")
+                fetch("api/album/all")
                         .then(res => res.json()) //in flow1, just do it
                         .then(data => {
-                            data.filter(fromAfterYear);
+                           filteredN= data.filter(fromAfterYear);
                     console.log("after filter:" + data);
-                            newer = data.map(n => listAlbumDivs(n));
+                            newer = filteredN.map(n => listAlbumDivs(n));
                             document.getElementById("galleri").innerHTML = newer;
                             document.getElementById("albumQ").innerHTML = "There is " + newer.length + " albums from after " + minYear;
                         });
             });
 
 
-
-
-//---------------------------------------------------------------------------------------------------------------------
-//---------------------------------------------------------------------------------------------------------------------
-//---------------------------------------------------------------------------------------------------------------------
-//---------------------------------------------------------------------------------------------------------------------
 
 
             var SortbyTitle = function (a, b) {
