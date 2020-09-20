@@ -39,17 +39,11 @@ public class CarsResource {
     public CarsResource() {
     }
 
-    @GET
-    @Produces(MediaType.TEXT_HTML)
-    public String cardemo() {
-        //   return "{\"msg\":\"<p1>Car stock Demo<p1>\"}";
-        return "<h1>Car Stock Demo<h1>";
-    }
     
     @Path("all")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getAllMembers() {
+    public String getAllCars() {
         List<Cars> all = FACADE.getAllCars();
         //List<CarsDTO> dtos = converter.listMemberEntityToDTO(all);
         List<CarsDTO> dtos = new ArrayList();

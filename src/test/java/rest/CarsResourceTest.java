@@ -72,7 +72,7 @@ public class CarsResourceTest {
 
         try {
             em.getTransaction().begin();
-            em.createQuery("DELETE FROM Student").executeUpdate();
+            em.createQuery("DELETE FROM Cars").executeUpdate();
             em.persist(c1);
             em.persist(c2);
             em.getTransaction().commit();
@@ -81,30 +81,31 @@ public class CarsResourceTest {
         }
     }
 
-    @Test
+/*    @Test
     public void testDemo() {
         given()
         .contentType("text/html")
-        .get("/groupmembers/").then()
+        .get("/cars/").then()
         .assertThat()
         .statusCode(HttpStatus.OK_200.getStatusCode())
         .equals("<h1>Car Stock Demo<h1>");  
-    }
+    }*/
 
     @Test
-    public void testGetAllMembers() {
+    public void testGetAllCars() {
         
         given()
             .contentType("application/json")
-        .get("/groupmembers/all")
+        .get("/cars/all")
         .then()
         .assertThat()
         .statusCode(HttpStatus.OK_200.getStatusCode())
         .body("size()", is(2))
         .and()
-        .body("name",hasItems("Make1","Make2"));
-        
+        .body("name",hasItems("Make1","Make2"));   
     }
+
+
 
     @Test
     public void testInsertDataIfEmpty() {
@@ -120,13 +121,13 @@ public class CarsResourceTest {
         
          given()
             .contentType("application/json")
-        .get("/Cars/insertdata")
+        .get("/CarsResource/insertdata")
         .then()
         .assertThat()
         .statusCode(HttpStatus.OK_200.getStatusCode())
         .body("size()", is(4))
         .and()
-        .body("name",hasItems("Magdalena","Selina"));      
+        .body("name",hasItems("Make1","Make2"));      
     }
    
 }

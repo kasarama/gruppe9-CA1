@@ -53,8 +53,8 @@ public class CarsFacadeTest {
   
     @Test
     public void testAddNewCar() {
-        Cars result = facade.addNewCar(new Cars(1,1,"test1","test1",1,"test1"));
-        assertTrue(result.getModel().equals("test1"));
+        Cars result = facade.addNewCar(new Cars(1,2,"test1","test2",3,"test3"));
+        assertTrue(result.getModel().equals("test2"));
     }
 
     @Test

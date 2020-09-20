@@ -20,6 +20,9 @@ public class Cars implements Serializable {
     private String model;
     private int price;
     private String img;
+
+    public Cars() {
+    }
     
     public Cars(int id, int byear, String make, String model, int price, String img){
         this.id = id;
