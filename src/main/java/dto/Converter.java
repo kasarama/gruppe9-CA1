@@ -80,7 +80,7 @@ public class Converter {
             
          
             
-            Album album = new Album(year,price,publishers[indexPubl],countries[i%7],edition,copy,row,placing[i%3],statuses[i%4]);
+            Album album = new Album(titles[i],year,price,publishers[indexPubl],countries[i%7],edition,copy,row,placing[i%3],statuses[i%4]);
             bigOne.add(album);
         }
         return bigOne;

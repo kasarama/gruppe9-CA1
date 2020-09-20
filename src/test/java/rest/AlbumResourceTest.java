@@ -33,8 +33,8 @@ public class AlbumResourceTest {
 
     private static final int SERVER_PORT = 7777;
     private static final String SERVER_URL = "http://localhost/api";
-    private static Album al = new Album(2020, 2500, "Your Mama", "Poland", 3, 4, 10, "home", "done");
-    private static Album bum = new Album(1900, 200, "Your Papa", "UK", 13, 4, 10, "none", "up");
+    private static Album al = new Album("MAM;A",2020, 2500, "Your Mama", "Poland", 3, 4, 10, "home", "done");
+    private static Album bum = new Album("Pap",1900, 200, "Your Papa", "UK", 13, 4, 10, "none", "up");
 
     static final URI BASE_URI = UriBuilder.fromUri(SERVER_URL).port(SERVER_PORT).build();
     private static HttpServer httpServer;
