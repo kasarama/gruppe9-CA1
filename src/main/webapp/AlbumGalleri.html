@@ -8,23 +8,23 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
-        <title>Car Gallery</title>
+        <title>Album Gallery</title>
     </head>
 
 
-    <body>
+    <body onload="fetchOnLoad()">
 
         <!-- Navigation -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
             <div class="container">
-                <a class="navbar-brand" href="index.html">Back to school</a>
+                <a class="navbar-brand" href="index.html">Go home!</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="#">Home
+                            <a class="nav-link" href="#">Roll-up
                                 <span class="sr-only">(current)</span>
                             </a>
                         </li>
@@ -47,27 +47,39 @@
 
             <!-- Jumbotron Header -->
             <header class="jumbotron my-4">
-                <h1 class="display-3">A Warm Welcome!</h1>
-                <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, ipsam, eligendi, in quo sunt possimus non incidunt odit vero aliquid similique quaerat nam nobis illo aspernatur vitae fugiat numquam repellat.</p>
-                <a href="#" class="btn btn-primary btn-lg">Call to action!</a>
+                <h1 class="display-3">Take a look at the Albms</h1>
+                <p class="lead" id="albumQ">We've got many of them</p>
+
+                <form>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Find from before year</label>
+                        <input type="number" min=1900 max =2020 class="form-control" id="maxYear" placeholder="1990">
+                        <button type="submit" class="btn btn-active" id="beforeYear">Search</button>
+                    </div>
+                </form>
+                <form>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Find from after year</label>
+                        <input type="number" min=1900 max =2020 class="form-control" id="minYear" placeholder="1990">
+                        <button type="submit" class="btn btn-active"  id="afterYear" >Search</button>
+                    </div>
+                </form>
+                
+                    <div class="form-group">
+
+                        <button type="button" class="btn btn-active" id="sortByPublisher">Sort by publisher</button>
+                    </div>
+
+                    <div class="form-group">
+
+                        <button type="button" class="btn btn-active" id="sortByTitle">Sort albums by title</button>
+                    </div>
+
             </header>
 
             <!-- Page Features -->
-            <div class="row text-center">
+            <div class="row text-center" id='galleri'>
 
-                
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <img class="card-img-top" src="img/car_demo.png" alt="http://placehold.it/500x325">
-                        <div class="card-body">
-                            <h4 class="card-title">Card title</h4>
-                            
-                        </div>
-                        <div class="card-footer">
-                            <a href="#" class="btn btn-primary">Find Out More!</a>
-                        </div>
-                    </div>
-                </div>
 
 
             </div>
@@ -79,52 +91,13 @@
         <!-- Footer -->
         <footer class="py-5 bg-dark">
             <div class="container">
-                <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
+                <p class="m-0 text-center text-white">Copyright &copy; dosmarter.tech 2020</p>
             </div>
             <!-- /.container -->
         </footer>
 
         <!-- Optional JavaScript -->
-        <script>
-
-
-
-
-
-
-
-/**
- * 
- * @returns {undefined}
- */
-
-            function fetchCar() {
-                fetch("https://vpic.nhtsa.dot.gov/api/vehicles/getallmakes?format=json")
-                        .then(res => res.json()) //in flow1, just do it
-                        .then(data => {
-                            // Inside this callback, and only here, the response data is available
-                            console.log("data", data);
-                            /* data now contains the response, converted to JavaScript
-                             Observe the output from the log-output above
-                             Now, just build your DOM changes using the data*/
-             return data;
-                        });
-                       
-            }
-            
-            
-            function carDiv(carArray){
-                return 
-                data.map(n => "<tr><th>" + n.name + "</th><th>" + n.id + "</th><th>" + n.color + "</th></tr>").join("")
-            }
-
-//   studentTableString = data.map(n => "<tr><th>" + n.name + "</th><th>" + n.id + "</th><th>" + n.color + "</th></tr>").join("");
-
-
-
-
-
-        </script>
+        <script src="js/albumGalleri.js"></script>
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>

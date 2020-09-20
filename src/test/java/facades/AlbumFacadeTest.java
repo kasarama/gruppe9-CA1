@@ -44,8 +44,8 @@ public class AlbumFacadeTest {
 
     @BeforeEach
     public void setUp(){
-        m1=new Album(1988, 12, "publisher1", "country1", 0, 0, 0, "placing1", "status");
-        m2=new Album(1988, 12, "publisher2", "Holland", 0, 10, 20, "down", "gone");
+        m1=new Album("Dark",1988, 12, "publisher1", "country1", 0, 0, 0, "placing1", "status");
+        m2=new Album("LOL",1988, 12, "publisher2", "Holland", 0, 10, 20, "down", "gone");
          EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
@@ -68,7 +68,7 @@ public class AlbumFacadeTest {
 
     @Test
     public void testAddNewAlbum() {
-        AlbumDTO result = facade.addNewAlbum(new Album(2020, 2, "Your mama", "Malta", 17, 10, 05, "down", "quo"));
+        AlbumDTO result = facade.addNewAlbum(new Album("Hanna",2020, 2, "Your mama", "Malta", 17, 10, 05, "down", "quo"));
         assertTrue(result.getPublisher().equals("Your mama"));
     }
 

@@ -37,7 +37,7 @@ private int yearOfrelise;
     public Album() {
     }
 
-    public Album(int yearOfrelise, int price, String publisher, String country, int edition, int copyQuantity, int row, String placing, String status) {
+    public Album(String title,int yearOfrelise, int price, String publisher, String country, int edition, int copyQuantity, int row, String placing, String status) {
         this.yearOfrelise = yearOfrelise;
         this.price = price;
         this.publisher = publisher;
@@ -47,6 +47,7 @@ private int yearOfrelise;
         this.rowNumber = row;
         this.placing = placing;
         this.status = status;
+        this.title=title;
     }
 
     public int getYearOfrelise() {
