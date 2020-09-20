@@ -78,7 +78,7 @@
                 event.preventDefault();
                 console.log("sortby title");
 
-                fetch("http://localhost:8080/Gruppe9-CA1/api/album/all")
+                fetch("api/album/all")
                         .then(res => res.json()) //in flow1, just do it
                         .then(data => {
                             console.log("fatching for title");
@@ -109,7 +109,7 @@
                 event.preventDefault();
                 console.log("sortby publisher");
 
-                fetch("http://localhost:8080/Gruppe9-CA1/api/album/all")
+                fetch("api/album/all")
                         .then(res => res.json()) //in flow1, just do it
                         .then(data => {
                             console.log("fatching for title");
